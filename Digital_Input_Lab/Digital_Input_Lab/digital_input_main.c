@@ -2,8 +2,9 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+// useful macro for future usage 
+// (or I just remember to use PINn_bm)
 #define BM_(x) ((1 << x))
-
 
 void delay(double time_ms) {
 	// delay function to accept arbitrary times
