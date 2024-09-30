@@ -109,6 +109,7 @@ int main(void) {
 	
 	// set output of everything except
 	// PIN0 and PIN1 to out
+	// alternatively, call PORTB.DIR before uart_init
 	PORTB.DIR &= (0x00 | PIN0_bm | PIN1_bm);
 	
 	int freq = 5;
