@@ -84,14 +84,6 @@ void LCDinitialize(void) {
 	LCDsendCommand(0x01);
 	_delay_ms(2);
 	LCDsendCommand(0x04 | 0x02);
-	
-	//TWI_2TXData(LCD_ADDR, CTRL_BYTE_CMD, 0b00101100);
-	//_delay_us(40);
-	//TWI_2TXData(LCD_ADDR, CTRL_BYTE_CMD, 0b00001111);
-	//_delay_us(40);
-	//TWI_2TXData(LCD_ADDR, CTRL_BYTE_CMD, 0x01);
-	//_delay_ms(2);
-	//TWI_2TXData(LCD_ADDR, CTRL_BYTE_CMD, 0x02);
 }
 
 void LCDdataWrite(uint8_t data) {
@@ -110,7 +102,6 @@ void LCDhome(void) {
 
 void LCDstring(char* str) {
 	int i = 0;
-	char p;
 	while (str[i] != '\0') {
 		LCDdataWrite(str[i]);
 		_delay_us(43);
