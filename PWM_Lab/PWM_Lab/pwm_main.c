@@ -7,6 +7,7 @@
 #include <limits.h>
 //#include "lcd_lib.h"
 #include "uart.h"
+#include <math.h>
 
 #define F_CPU 16000000UL
 #define PWM_SCALE		1
@@ -124,17 +125,27 @@ int main(void) {
 	init_TCA1();
 	init_ADC0();
 	
+	LCDinitialize();
+	
 	uart_init(3, 9600, NULL);
 	printf("done init\n");
 	
 	sei();
 	while (1) {
-		if (millis >= 1000) {
+		if (millis >= 500) {
 			millis = 0;
 			read_ADC0();
+			//char strbuf[6];
+			//dtostrf((float)sin(2.0*M_PI*dc_cmp/sawtooth_period), 4, 2, strbuf);
+			//printf("%d\t%d\t%s\n", sawtooth_period, dc_cmp, strbuf);
+			
 			char strbuf[6];
-			dtostrf((float)(100.0*dc_cmp/sawtooth_period), 4, 2, strbuf);
-			printf("%d\t%d\t%s\n", sawtooth_period, dc_cmp, strbuf);
+			dtostrf(dc*100.0, 4, 2, strbuf);
+			LCDclr();
+			LCDstring("duty cycle:");
+			LCDgotoXY(0, 1);
+			LCDstring(strbuf);
+			LCDstring("\%\0");
 		}
 		
 		dc = (float)(ADC0.RES)/4096;
@@ -143,9 +154,10 @@ int main(void) {
 		set_dc_TCA1(dc);
 		
 		sawtooth_period = dc * 1000;
-		pre_cmp2buf = (1.0*dc_cmp/sawtooth_period) * (PWM_PER+1);
+		// whoa a cosine wave
+		pre_cmp2buf = 0.5 * ((float)cos(2.0*M_PI*dc_cmp/sawtooth_period) + 1.0) * (PWM_PER+1);
+		//pre_cmp2buf = 1.0*dc_cmp/sawtooth_period * (PWM_PER+1);
 		TCA0.SINGLE.CMP2BUF = (uint16_t)pre_cmp2buf;
-		//TCA0.SINGLE.CMP2BUF = (4096/2) - 1;
 	}
 	
 	return 0;
