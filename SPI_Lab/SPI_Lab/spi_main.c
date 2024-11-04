@@ -11,6 +11,7 @@
 
 // whoever is reading this pls help me get a gf thx 
 
+// these are just some helpful functions for printing out binary values
 #define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
 #define BYTE_TO_BINARY(byte)  \
   ((byte) & 0x80 ? '1' : '0'), \
