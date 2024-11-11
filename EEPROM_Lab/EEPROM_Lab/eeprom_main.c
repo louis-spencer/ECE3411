@@ -34,6 +34,7 @@ void init_WDT(void) {
 
 
 uint8_t no_match_flag = 1;
+uint8_t start_wdt_flag = 0;
 
 void write_buf_eeprom(char buf[], uint8_t len) {
 	eeprom_write_byte(EEPROM_SZ_ADDR, len);
@@ -131,7 +132,7 @@ int main(void)
 	} else {
 		printf("\n--guess password--\n");
 		//print_pwd_eeprom();
-		init_WDT();
+		//init_WDT();
 		char cmp_buf[BUF_SZ];
 		
 		while (no_match_flag != 0) {
@@ -143,6 +144,10 @@ int main(void)
 			printf("wrong password\n");
 			memset(cmp_buf, 0, BUF_SZ);
 			
+			if (!start_wdt_flag) {
+				init_WDT();
+				start_wdt_flag = 1;
+			}
 		}
 		
 		wdt_disable();
