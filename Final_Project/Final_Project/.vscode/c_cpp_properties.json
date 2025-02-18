@@ -1,0 +1,47 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "c:/Users/louis/Documents/GitHub/ECE3411/Final_Project/Final_Project/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:/cygwin64/bin/gcc.exe",
+            "compilerPathInCppPropertiesJson": "C:/cygwin64/bin/gcc.exe",
+            "mergeConfigurations": false,
+            "browse": {
+                "path": [
+                    "c:/Users/louis/Documents/GitHub/ECE3411/Final_Project/Final_Project/**",
+                    "c:/Users/louis/Documents/GitHub/ECE3411/Final_Project/Final_Project"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
+        },
+        {
+            "name": "Embedded",
+            "includePath": [
+                "c:/Users/louis/Documents/GitHub/ECE3411/Final_Project/Final_Project/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "__AVR_AVR128DB48__"
+            ],
+            "mergeConfigurations": false,
+            "compilerPath": "C:\\Program Files (x86)\\Atmel\\Studio\\7.0\\toolchain\\avr8\\avr8-gnu-toolchain\\bin\\avr-gcc.exe",
+            "browse": {
+                "path": [
+                    "c:/Users/louis/Documents/GitHub/ECE3411/Final_Project/Final_Project/**",
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
+        }
+    ],
+    "version": 4
+}
